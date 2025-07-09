@@ -7,7 +7,7 @@ export default function PopularDestinationSection() {
     <section className="popular-destination-section section-padding">
       <div className="section-header">
         <h3 className="heading-3">Popular destinations for book transfers</h3>
-        <p className="base base--regular">
+        <p className="lg lg--regular">
           Know your destination like your own city.
         </p>
       </div>

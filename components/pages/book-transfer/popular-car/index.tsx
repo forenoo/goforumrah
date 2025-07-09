@@ -13,7 +13,7 @@ export default function PopularCarSection() {
     <section className="popular-car-section section-padding">
       <div className="section-header">
         <h3 className="heading-3">Popular car hire brands</h3>
-        <p className="base base--regular partner__header-description">
+        <p className="lg lg--regular">
           With various partner airlines, we are ready to fly you anywhere.
         </p>
       </div>

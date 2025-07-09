@@ -46,7 +46,7 @@ interface AirlinePartnerItemProps {
 function AirlinePartnerItem({ image }: AirlinePartnerItemProps) {
   return (
     <div className="airline-partner__item">
-      <Image src={image} alt="partner" width={100} height={100} />
+      <Image src={image} alt="partner" width={100} height={56} />
     </div>
   );
 }

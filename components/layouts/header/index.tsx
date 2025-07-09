@@ -1,8 +1,8 @@
 import React from "react";
 import "./header.scss";
 import { TabType } from "@/types/tabs-list";
-import Tabs from "../ui/tabs";
-import SearchBox from "../ui/search";
+import Tabs from "../../ui/tabs";
+import SearchBox from "../../ui/search";
 import Image from "next/image";
 
 export default function Header({

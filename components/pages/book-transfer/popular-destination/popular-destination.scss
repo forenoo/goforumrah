@@ -40,13 +40,14 @@
       @include respond(md) {
         font-size: 1.4rem;
       }
-    }
 
-    &-description-price {
-      font-size: 1.8rem;
+      &-price {
+        margin: 0 4px;
+        font-size: 1.8rem;
 
-      @include respond(md) {
-        font-size: 1.6rem;
+        @include respond(md) {
+          font-size: 1.6rem;
+        }
       }
     }
   }

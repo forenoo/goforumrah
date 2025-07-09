@@ -1,8 +1,8 @@
 "use client";
 
-import Header from "@/components/header";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
+import Header from "@/components/layouts/header";
+import Navbar from "@/components/layouts/navbar";
+import Footer from "@/components/layouts/footer";
 import { TabType } from "@/types/tabs-list";
 import { useState } from "react";
 import MainLayout from "@/components/pages/main";

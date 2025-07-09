@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 
 const generalSans = localFont({
-  src: "../public/fonts/GeneralSans-Variable.woff2",
+  src: "../assets/fonts/GeneralSans-Variable.woff2",
   variable: "--font-general-sans",
 });
 

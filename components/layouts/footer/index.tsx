@@ -1,10 +1,9 @@
 import React from "react";
-
-import "./footer.scss";
 import Link from "next/link";
 import Image from "next/image";
-import { FOOTER_LINKS } from "../../constants/footer-link";
-import Button from "../ui/button";
+import { FOOTER_LINKS } from "@/constants/footer-link";
+import Button from "@/components/ui/button";
+import "./footer.scss";
 
 export default function Footer() {
   return (
