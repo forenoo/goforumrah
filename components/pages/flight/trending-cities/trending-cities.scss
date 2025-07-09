@@ -1,0 +1,36 @@
+@use "../../../../sass/abstracts/variables.scss" as *;
+@use "../../../../sass/abstracts/mixins.scss" as *;
+
+.trending-cities-section {
+  padding: 140px 0 48px 0;
+
+  @include respond(xl) {
+    padding: 460px 0 48px 0;
+  }
+}
+
+.trending-city {
+  &__header {
+    text-align: center;
+
+    &-description {
+      color: $color-secondary;
+      margin-top: 12px;
+    }
+  }
+
+  &__content {
+    margin-top: 40px;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    @include respond(lg) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include respond(sm) {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+  }
+}

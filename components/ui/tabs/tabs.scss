@@ -1,0 +1,96 @@
+@use "../../../sass/abstracts/variables.scss" as *;
+@use "../../../sass/abstracts/mixins.scss" as *;
+
+.tabs {
+  border-radius: 1000px;
+  background-color: $color-white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 8px;
+
+  @include respond(xl) {
+    width: 100%;
+    justify-content: space-between;
+
+    @include respond(md) {
+      gap: 0px;
+    }
+  }
+
+  &-wrapper {
+    position: absolute;
+    top: 40px;
+
+    @include respond(md) {
+      width: 100%;
+      padding: 0 40px;
+
+      @include respond(sm) {
+        padding: 0 20px;
+      }
+    }
+  }
+
+  &-item {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1000px;
+    padding: 12px 32px;
+    gap: 12px;
+    color: $color-primary;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+
+    @include respond(sm) {
+      padding: 8px 16px;
+    }
+
+    &:hover {
+      background-color: $color-navi-1;
+      color: $color-white;
+    }
+
+    &-icon {
+      width: 24px;
+      height: 24px;
+      transition: all 0.3s ease;
+    }
+
+    &--active {
+      background-color: $color-navi-1;
+      color: $color-white;
+    }
+
+    &-link,
+    &-link:visited {
+      color: inherit;
+      text-decoration: none;
+      width: fit-content;
+    }
+
+    &:not(&--active) {
+      .tabs-item-link,
+      .tabs-item-link:visited {
+        @include respond(md) {
+          display: none;
+        }
+      }
+    }
+
+    &:hover .tabs-item-icon {
+      filter: brightness(0) saturate(100%) invert(100%) sepia(0%)
+        saturate(7495%) hue-rotate(288deg) brightness(100%) contrast(100%);
+    }
+
+    &--active .tabs-item-icon {
+      filter: brightness(0) saturate(100%) invert(100%) sepia(0%)
+        saturate(7495%) hue-rotate(288deg) brightness(100%) contrast(100%);
+    }
+  }
+}

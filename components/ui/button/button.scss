@@ -1,0 +1,29 @@
+@use "../../../sass/abstracts/variables.scss" as *;
+
+.btn {
+  padding: 20px 40px;
+  background-color: $color-toscha-1;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  width: fit-content;
+  height: 100%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &--small {
+    padding: 14px 28px !important;
+  }
+
+  &--rounded-full {
+    border-radius: 1000px !important;
+  }
+
+  &--w-full {
+    width: 100% !important;
+  }
+
+  &:hover {
+    background-color: $color-toscha-2;
+  }
+}

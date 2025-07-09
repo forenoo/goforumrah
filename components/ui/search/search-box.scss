@@ -1,0 +1,254 @@
+@use "../../../sass/abstracts/mixins.scss" as *;
+@use "../../../sass/abstracts/variables.scss" as *;
+
+.search {
+  position: absolute;
+  bottom: -40px;
+  width: 100%;
+
+  @include respond(xl) {
+    bottom: -200px;
+
+    &--flight {
+      bottom: -370px !important;
+    }
+
+    &--book-transfer {
+      bottom: -280px !important;
+    }
+  }
+
+  &-box {
+    border-radius: 1000px;
+    color: $color-subtle;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $color-white;
+    box-shadow: 0 12px 44px rgba(5, 44, 71, 0.05);
+    border: 1px solid $color-input;
+    position: relative;
+    z-index: 10;
+
+    @include respond(xl) {
+      flex-direction: column;
+      border-radius: 24px;
+    }
+
+    & > button {
+      @include respond(xl) {
+        width: 100%;
+      }
+    }
+
+    .flight-type-toggle,
+    .car-type-toggle {
+      padding: 12px 20px;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+      background-color: $color-white;
+      color: $color-primary;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      position: absolute;
+      top: -45px;
+      left: 64px;
+      border: 1px solid $color-separator;
+
+      @include respond(sm) {
+        left: -1px;
+        width: calc(100% + 2px);
+        justify-content: flex-start;
+      }
+
+      &-item {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        input {
+          display: none;
+        }
+
+        .radio-button {
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          border: 1px solid $color-input;
+          position: relative;
+
+          &::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background-color: $color-toscha-1;
+            border-radius: 50%;
+            opacity: 0;
+          }
+        }
+
+        &:has(input:checked) {
+          color: $color-toscha-1;
+          font-weight: 500;
+
+          .radio-button {
+            border-color: $color-toscha-1;
+          }
+
+          .radio-button::after {
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    .car-type-toggle {
+      @include respond(sm) {
+        top: -75px;
+        gap: 8px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  }
+
+  &-container {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    margin-right: 16px;
+    justify-content: space-between;
+
+    &--flight {
+      & > *:is(:first-child) {
+        border-right: none !important;
+      }
+
+      .search-item {
+        flex: 2;
+        justify-content: center;
+      }
+    }
+
+    @include respond(xl) {
+      margin-right: 0;
+      width: 100%;
+    }
+
+    & > *:not(:last-child) {
+      border-right: 1px solid $color-separator;
+    }
+
+    @include respond(xl) {
+      margin: 0 0 16px 0;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+
+      & > *:not(:last-child) {
+        border-right: none;
+      }
+
+      & > * {
+        width: 100%;
+        border-bottom: 1px solid $color-separator;
+        padding: 22px 20px !important;
+      }
+    }
+  }
+
+  &-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+
+    @include respond(xl) {
+      justify-content: flex-start;
+    }
+
+    &--full {
+      flex: 2;
+    }
+
+    &--small {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+
+      @include respond(xl) {
+        padding: 0;
+      }
+    }
+
+    &-wrapper {
+      display: flex;
+      align-items: center;
+
+      @include respond(xl) {
+        justify-content: space-between;
+      }
+    }
+
+    &-icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    &-input {
+      border: none;
+      outline: none;
+      background-color: transparent;
+      color: $color-subtle;
+      font-size: 1.6rem;
+      font-weight: 400;
+      line-height: 1.5;
+      width: 100%;
+
+      &::placeholder {
+        font-size: 1.6rem;
+        color: $color-subtle;
+      }
+    }
+  }
+}
+
+.arrow-left-right-icon {
+  width: 28px;
+  height: 28px;
+  background-color: $color-white;
+  border-radius: 50%;
+  left: 185px;
+  padding: 4px;
+  border: 1px solid $color-separator;
+
+  @media (max-width: 144) {
+    left: 100px;
+  }
+
+  @include respond(xl) {
+    display: none;
+  }
+}
+
+.dot-separator {
+  width: 4px;
+  height: 4px;
+  background-color: $color-separator;
+  border-radius: 50%;
+}
+
+.border-radius-top-none {
+  @include respond(sm) {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+  }
+}

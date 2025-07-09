@@ -1,0 +1,68 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.plan-trip {
+  &__header {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 48px;
+
+    &-description {
+      color: $color-secondary;
+    }
+  }
+
+  &__cities {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 20px;
+
+    @include respond(lg) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @include respond(sm) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  &__city {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &-image {
+      width: 100%;
+      object-fit: cover;
+
+      &-box {
+        max-width: 140px;
+        max-height: 140px;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+    }
+
+    &-content {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    &-name {
+      font-size: 1.8rem;
+      font-weight: 600;
+      line-height: 140%;
+    }
+
+    &-description {
+      color: #757575;
+    }
+  }
+}

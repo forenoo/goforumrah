@@ -1,0 +1,138 @@
+@use "../../sass/abstracts/variables.scss" as *;
+@use "../../sass/abstracts/mixins.scss" as *;
+
+.header {
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  &--hotel {
+    background-image: linear-gradient(#052c4700, #052c4799),
+      url("/img/modern-hotel-buildings-sea-shore-with-palm-trees-green-lawn\ 1.png");
+  }
+
+  &--flight {
+    background-image: linear-gradient(#052c4700, #052c4799),
+      url("/img/bg-flights.jpg");
+  }
+
+  &--book-transfer {
+    background-image: linear-gradient(#052c4700, #052c4799),
+      url("/img/bg-car.jpg");
+  }
+
+  @include respond(xl) {
+    height: 520px;
+  }
+
+  .content {
+    margin-top: 80px;
+    text-align: center;
+
+    @include respond(xl) {
+      margin-top: 0;
+    }
+
+    & > p {
+      margin-top: 16px;
+    }
+  }
+}
+
+.aged-driver-check {
+  position: absolute;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  bottom: -100px;
+
+  .custom-checkbox {
+    margin-left: 84px;
+  }
+
+  @include respond(xl) {
+    bottom: -300px;
+
+    .custom-checkbox {
+      margin-left: 20px;
+    }
+  }
+
+  &-item {
+    display: flex;
+    align-items: center;
+    color: $color-primary;
+  }
+
+  &-input {
+    margin-right: 12px;
+  }
+
+  &-icon {
+    width: 24px;
+    height: 24px;
+    margin-left: 4px;
+  }
+}
+
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  color: $color-primary;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+
+  &__input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  &__checkmark {
+    position: relative;
+    height: 20px;
+    width: 20px;
+    background-color: $color-white;
+    border: 2px solid $color-input;
+    border-radius: 4px;
+    margin-right: 12px;
+    transition: all 0.2s ease;
+    display: inline-block;
+
+    &:after {
+      content: "";
+      position: absolute;
+      display: none;
+      left: 6px;
+      top: 2px;
+      width: 5px;
+      height: 10px;
+      border: solid $color-white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+  }
+
+  &:hover .custom-checkbox__checkmark {
+    border-color: $color-toscha-1;
+  }
+
+  &__input:checked ~ .custom-checkbox__checkmark {
+    background-color: $color-toscha-1;
+    border-color: $color-toscha-1;
+  }
+
+  &__input:checked ~ .custom-checkbox__checkmark:after {
+    display: block;
+  }
+}

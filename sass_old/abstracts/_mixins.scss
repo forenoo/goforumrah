@@ -1,0 +1,25 @@
+@use "./variables" as *;
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == xl {
+    @media (max-width: $screen-xl) {
+      @content;
+    }
+  } @else if $breakpoint == lg {
+    @media (max-width: $screen-lg) {
+      @content;
+    }
+  } @else if $breakpoint == md {
+    @media (max-width: $screen-md) {
+      @content;
+    }
+  } @else if $breakpoint == sm {
+    @media (max-width: $screen-sm) {
+      @content;
+    }
+  } @else if $breakpoint == xs {
+    @media (max-width: $screen-xs) {
+      @content;
+    }
+  }
+}

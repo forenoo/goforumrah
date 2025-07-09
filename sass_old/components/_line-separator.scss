@@ -1,0 +1,6 @@
+@use "../abstracts/variables" as *;
+
+.line-separator {
+  width: 1px;
+  background-color: $color-separator;
+}

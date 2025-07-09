@@ -1,0 +1,18 @@
+@use "../../../../sass/abstracts/variables.scss" as *;
+@use "../../../../sass/abstracts/mixins.scss" as *;
+
+.plan-trip {
+  &__cities {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 20px;
+
+    @include respond(lg) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @include respond(sm) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+}

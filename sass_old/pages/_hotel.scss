@@ -1,0 +1,267 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.hotel-header {
+  background-image: linear-gradient(#052c4700, #052c4799),
+    url("../assets/img/modern-hotel-buildings-sea-shore-with-palm-trees-green-lawn\ 1.png");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  @include respond(xl) {
+    height: 520px;
+  }
+
+  .tabs {
+    border-radius: 1000px;
+    background-color: $color-white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 8px;
+
+    @include respond(xl) {
+      width: 100%;
+      justify-content: space-between;
+
+      @include respond(md) {
+        gap: 0px;
+      }
+    }
+
+    &-wrapper {
+      position: absolute;
+      top: 40px;
+
+      @include respond(md) {
+        width: 100%;
+        padding: 0 40px;
+
+        @include respond(sm) {
+          padding: 0 20px;
+        }
+      }
+    }
+
+    &-item {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 1000px;
+      padding: 12px 32px;
+      gap: 12px;
+      color: $color-primary;
+      transition: all 0.3s ease;
+      cursor: pointer;
+
+      @include respond(sm) {
+        padding: 8px 16px;
+      }
+
+      &:hover {
+        background-color: $color-navi-1;
+        color: $color-white;
+      }
+
+      &-icon {
+        width: 24px;
+        height: 24px;
+        transition: all 0.3s ease;
+      }
+
+      &--active {
+        background-color: $color-navi-1;
+        color: $color-white;
+      }
+
+      &-link,
+      &-link:visited {
+        color: inherit;
+        text-decoration: none;
+        width: fit-content;
+      }
+
+      &:not(&--active) {
+
+        .tabs-item-link,
+        .tabs-item-link:visited {
+          @include respond(md) {
+            display: none;
+          }
+        }
+      }
+
+      &:hover .tabs-item-icon {
+        filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7495%) hue-rotate(288deg) brightness(100%) contrast(100%);
+      }
+
+      &--active .tabs-item-icon {
+        filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7495%) hue-rotate(288deg) brightness(100%) contrast(100%);
+      }
+    }
+  }
+
+  .content {
+    margin-top: 80px;
+    text-align: center;
+
+    @include respond(xl) {
+      margin-top: 0;
+    }
+
+    &>p {
+      margin-top: 16px;
+    }
+  }
+
+  .search {
+    position: absolute;
+    bottom: -40px;
+    width: 100%;
+
+    @include respond(xl) {
+      bottom: -200px;
+    }
+
+    &-box {
+      border-radius: 1000px;
+      color: $color-subtle;
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: $color-white;
+      box-shadow: 0 12px 44px rgba($color-navi-1, 0.05);
+      border: 1px solid $color-input;
+
+      @include respond(xl) {
+        flex-direction: column;
+        border-radius: 24px;
+      }
+
+      .btn {
+        @include respond(xl) {
+          width: 100%;
+        }
+      }
+    }
+
+    &-container {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      margin-right: 16px;
+      gap: 16px;
+
+      @include respond(xl) {
+        margin-right: 0;
+        width: 100%;
+      }
+
+      &>*:not(:last-child) {
+        border-right: 1px solid $color-separator;
+      }
+
+      @include respond(xl) {
+        margin: 0 0 16px 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+
+        &>*:not(:last-child) {
+          border-right: none;
+        }
+
+        &>* {
+          width: 100%;
+          border-bottom: 1px solid $color-separator;
+          padding: 22px 20px !important;
+        }
+      }
+    }
+
+    &-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+
+      &--full {
+        flex: 2;
+      }
+
+      &--small {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 20px;
+
+        @include respond(xl) {
+          padding: 0;
+        }
+      }
+
+      &-input {
+        border: none;
+        outline: none;
+        background-color: transparent;
+        color: $color-subtle;
+        font-size: 1.6rem;
+        font-weight: 400;
+        line-height: 1.5;
+        width: 100%;
+
+        &::placeholder {
+          font-size: 1.6rem;
+          color: $color-subtle;
+        }
+      }
+
+      &-wrapper {
+        display: flex;
+        align-items: center;
+
+        @include respond(xl) {
+          justify-content: space-between;
+        }
+      }
+
+      &-icon {
+        width: 24px;
+        height: 24px;
+        fill: $color-subtle;
+      }
+    }
+  }
+}
+
+.main {
+  color: $color-primary;
+}
+
+.section-banner {
+  padding: 90px 0 48px 0;
+
+  @include respond(xl) {
+    padding: 260px 0 48px 0;
+  }
+}
+
+.section-plan-trip {
+  padding: 48px 0;
+}
+
+.section-hotel-recommendation {
+  padding: 48px 0;
+}
+
+.section-inspiration-trip {
+  padding: 48px 0;
+}

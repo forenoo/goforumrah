@@ -1,0 +1,53 @@
+@use "../../../../sass/abstracts/mixins" as *;
+@use "../../../../sass/abstracts/variables" as *;
+
+.popular-destination {
+  &__content {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+
+    @include respond(lg) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    &-box {
+      border-radius: 16px;
+      overflow: hidden;
+    }
+  }
+
+  &__info {
+    margin-top: 24px;
+
+    &-title {
+      margin-bottom: 8px;
+
+      @include respond(md) {
+        margin-bottom: 4px;
+        font-size: 1.6rem;
+      }
+    }
+
+    &-description {
+      @include respond(md) {
+        font-size: 1.4rem;
+      }
+    }
+
+    &-description-price {
+      font-size: 1.8rem;
+
+      @include respond(md) {
+        font-size: 1.6rem;
+      }
+    }
+  }
+}

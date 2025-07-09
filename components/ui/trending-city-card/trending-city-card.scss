@@ -1,0 +1,67 @@
+@use "../../../sass/abstracts/mixins.scss" as *;
+@use "../../../sass/abstracts/variables.scss" as *;
+
+.trending-city__card {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 12px;
+  padding: 24px;
+  color: $color-white;
+  height: 215px;
+  display: flex;
+  align-items: flex-end;
+
+  &:is(:last-child) {
+    @include respond(lg) {
+      grid-column: span 2;
+    }
+
+    @include respond(sm) {
+      grid-column: span 1;
+    }
+  }
+
+  &--1 {
+    background-image: linear-gradient(
+        to bottom,
+        rgba($color-navi-1, 0),
+        rgba($color-navi-1, 0.4),
+        rgba($color-navi-1, 0.8)
+      ),
+      url("/img/trending-1.png");
+  }
+
+  &--2 {
+    background-image: linear-gradient(
+        to bottom,
+        rgba($color-navi-1, 0),
+        rgba($color-navi-1, 0.4),
+        rgba($color-navi-1, 0.8)
+      ),
+      url("/img/trending-2.png");
+  }
+
+  &--3 {
+    background-image: linear-gradient(
+        to bottom,
+        rgba($color-navi-1, 0),
+        rgba($color-navi-1, 0.4),
+        rgba($color-navi-1, 0.8)
+      ),
+      url("/img/trending-3.png");
+  }
+
+  &-location {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+
+    &-icon {
+      width: 24px;
+      height: 24px;
+      filter: brightness(0) saturate(100%) invert(100%) sepia(0%)
+        saturate(7495%) hue-rotate(288deg) brightness(100%) contrast(100%);
+    }
+  }
+}

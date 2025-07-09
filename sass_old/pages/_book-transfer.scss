@@ -1,0 +1,436 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.book-transfer-header {
+  background-image: linear-gradient(#052c4700, #052c4799),
+    url("../assets/img/bg-car.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  @include respond(xl) {
+    height: 520px;
+  }
+
+  .tabs {
+    border-radius: 1000px;
+    background-color: $color-white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 8px;
+
+    @include respond(xl) {
+      width: 100%;
+      justify-content: space-between;
+
+      @include respond(md) {
+        gap: 0px;
+      }
+    }
+
+    &-wrapper {
+      position: absolute;
+      top: 40px;
+
+      @include respond(md) {
+        width: 100%;
+        padding: 0 40px;
+
+        @include respond(sm) {
+          padding: 0 20px;
+        }
+      }
+    }
+
+    &-item {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 1000px;
+      padding: 12px 32px;
+      gap: 12px;
+      color: $color-primary;
+      transition: all 0.3s ease;
+      cursor: pointer;
+
+      @include respond(sm) {
+        padding: 8px 16px;
+      }
+
+      &:hover {
+        background-color: $color-navi-1;
+        color: $color-white;
+      }
+
+      &-icon {
+        width: 24px;
+        height: 24px;
+        transition: all 0.3s ease;
+      }
+
+      &--active {
+        background-color: $color-navi-1;
+        color: $color-white;
+      }
+
+      &-link,
+      &-link:visited {
+        color: inherit;
+        text-decoration: none;
+        width: fit-content;
+      }
+
+      &:not(&--active) {
+        .tabs-item-link,
+        .tabs-item-link:visited {
+          @include respond(md) {
+            display: none;
+          }
+        }
+      }
+
+      &:hover .tabs-item-icon {
+        filter: brightness(0) saturate(100%) invert(100%) sepia(0%)
+          saturate(7495%) hue-rotate(288deg) brightness(100%) contrast(100%);
+      }
+
+      &--active .tabs-item-icon {
+        filter: brightness(0) saturate(100%) invert(100%) sepia(0%)
+          saturate(7495%) hue-rotate(288deg) brightness(100%) contrast(100%);
+      }
+    }
+  }
+
+  .content {
+    margin-top: 80px;
+    text-align: center;
+
+    @include respond(xl) {
+      margin-top: 0;
+    }
+
+    & > p {
+      margin-top: 16px;
+    }
+  }
+
+  .search {
+    position: absolute;
+    bottom: -40px;
+    width: 100%;
+
+    @include respond(xl) {
+      bottom: -250px;
+    }
+
+    &-box {
+      border-radius: 1000px;
+      color: $color-subtle;
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: $color-white;
+      box-shadow: 0 12px 44px rgba($color-navi-1, 0.05);
+      border: 1px solid $color-input;
+      position: relative;
+      z-index: 10;
+
+      @include respond(xl) {
+        flex-direction: column;
+        border-radius: 24px;
+      }
+
+      @include respond(sm) {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+
+      .btn {
+        @include respond(xl) {
+          width: 100%;
+        }
+      }
+
+      .car-type-toggle {
+        padding: 12px 20px;
+        border-top-left-radius: 16px;
+        border-top-right-radius: 16px;
+        background-color: $color-white;
+        color: $color-primary;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        position: absolute;
+        z-index: -1;
+        top: -45px;
+        left: 64px;
+        border: 1px solid $color-separator;
+
+        @include respond(sm) {
+          top: -75px;
+          gap: 8px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 100%;
+          justify-content: center;
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        &-item {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+
+          input {
+            display: none;
+          }
+
+          .radio-button {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 1px solid $color-input;
+            position: relative;
+
+            &::after {
+              content: "";
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              width: 10px;
+              height: 10px;
+              background-color: $color-toscha-1;
+              border-radius: 50%;
+              opacity: 0;
+            }
+          }
+
+          &:has(input:checked) {
+            color: $color-toscha-1;
+            font-weight: 500;
+
+            .radio-button {
+              border-color: $color-toscha-1;
+            }
+
+            .radio-button::after {
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+
+    &-container {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      margin-right: 16px;
+      justify-content: space-between;
+
+      @include respond(xl) {
+        margin-right: 0;
+        width: 100%;
+      }
+
+      & > *:not(:last-child) {
+        border-right: 1px solid $color-separator;
+      }
+
+      @include respond(xl) {
+        margin: 0 0 16px 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+
+        & > *:not(:last-child) {
+          border-right: none;
+        }
+
+        & > * {
+          width: 100%;
+          border-bottom: 1px solid $color-separator;
+          padding: 22px 20px !important;
+        }
+      }
+    }
+
+    &-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 12px 20px;
+
+      &:is(:first-child) {
+        justify-content: flex-start;
+      }
+
+      @include respond(xl) {
+        justify-content: flex-start;
+      }
+
+      &--full {
+        flex: 2;
+      }
+
+      &--small {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 20px;
+
+        @include respond(xl) {
+          padding: 0;
+        }
+      }
+
+      &-wrapper {
+        display: flex;
+        align-items: center;
+
+        @include respond(xl) {
+          justify-content: space-between;
+        }
+      }
+
+      &-icon {
+        width: 24px;
+        height: 24px;
+        fill: $color-subtle;
+      }
+    }
+  }
+
+  .aged-driver-check {
+    position: absolute;
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    bottom: -100px;
+
+    .custom-checkbox {
+      margin-left: 84px;
+    }
+
+    @include respond(xl) {
+      bottom: -300px;
+
+      .custom-checkbox {
+        margin-left: 20px;
+      }
+    }
+
+    &-item {
+      display: flex;
+      align-items: center;
+      color: $color-primary;
+    }
+
+    &-input {
+      margin-right: 12px;
+    }
+
+    &-icon {
+      width: 24px;
+      height: 24px;
+      margin-left: 4px;
+    }
+  }
+
+  .custom-checkbox {
+    display: flex;
+    align-items: center;
+    color: $color-primary;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+
+    &__input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+
+    &__checkmark {
+      position: relative;
+      height: 20px;
+      width: 20px;
+      background-color: $color-white;
+      border: 2px solid $color-input;
+      border-radius: 4px;
+      margin-right: 12px;
+      transition: all 0.2s ease;
+      display: inline-block;
+
+      &:after {
+        content: "";
+        position: absolute;
+        display: none;
+        left: 6px;
+        top: 2px;
+        width: 5px;
+        height: 10px;
+        border: solid $color-white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+    }
+
+    &:hover .custom-checkbox__checkmark {
+      border-color: $color-toscha-1;
+    }
+
+    &__input:checked ~ .custom-checkbox__checkmark {
+      background-color: $color-toscha-1;
+      border-color: $color-toscha-1;
+    }
+
+    &__input:checked ~ .custom-checkbox__checkmark:after {
+      display: block;
+    }
+  }
+
+  .arrow-left-right-icon {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    background-color: $color-white;
+    border-radius: 50%;
+    left: 185px;
+    padding: 4px;
+    border: 1px solid $color-separator;
+
+    @include respond(xl) {
+      display: none;
+    }
+  }
+}
+
+.section-banner--car {
+  padding: 170px 0 48px 0;
+
+  @include respond(xl) {
+    padding: 380px 0 48px 0;
+  }
+}
+
+.section-popular-destination {
+  padding: 48px 0;
+}
