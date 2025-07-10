@@ -171,7 +171,7 @@
     padding: 12px 20px;
 
     @include respond(xl) {
-      justify-content: flex-start;
+      justify-content: flex-start !important;
     }
 
     &--full {
@@ -207,7 +207,7 @@
       border: none;
       outline: none;
       background-color: transparent;
-      color: $color-subtle;
+      color: $color-primary;
       font-size: 1.6rem;
       font-weight: 400;
       line-height: 1.5;

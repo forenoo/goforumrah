@@ -58,7 +58,7 @@
   }
 
   @include respond(xl) {
-    bottom: -300px;
+    bottom: -330px;
 
     .custom-checkbox {
       margin-left: 20px;
@@ -74,12 +74,12 @@
   &-input {
     margin-right: 12px;
   }
+}
 
-  &-icon {
-    width: 24px;
-    height: 24px;
-    margin-left: 4px;
-  }
+.custom-checkbox-icon {
+  width: 24px;
+  height: 24px;
+  margin-left: 4px;
 }
 
 .custom-checkbox {

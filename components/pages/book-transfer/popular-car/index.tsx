@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React from "react";
 import CarBrand1 from "@/public/img/Car-hire-brand-01.svg";
 import CarBrand2 from "@/public/img/Car-hire-brand-02.svg";
@@ -18,8 +17,10 @@ export default function PopularCarSection() {
         </p>
       </div>
       <div className="popular-car__content">
-        {POPULAR_CAR_BRANDS.map((brand, index) => (
-          <PopularCarItem key={index} image={brand} />
+        {POPULAR_CAR_BRANDS.map((Brand, index) => (
+          <PopularCarItem key={index}>
+            <Brand />
+          </PopularCarItem>
         ))}
       </div>
     </section>
@@ -27,13 +28,9 @@ export default function PopularCarSection() {
 }
 
 interface PopularCarItemProps {
-  image: string;
+  children: React.ReactNode;
 }
 
-function PopularCarItem({ image }: PopularCarItemProps) {
-  return (
-    <div className="popular-car__item">
-      <Image src={image} alt="car" width={56} height={56} />
-    </div>
-  );
+function PopularCarItem({ children }: PopularCarItemProps) {
+  return <div className="popular-car__item">{children}</div>;
 }

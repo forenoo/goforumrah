@@ -1,10 +1,10 @@
 "use client";
 
+import { TabType } from "@/types/tabs-list";
+import { useState } from "react";
 import Header from "@/components/layouts/header";
 import Navbar from "@/components/layouts/navbar";
 import Footer from "@/components/layouts/footer";
-import { TabType } from "@/types/tabs-list";
-import { useState } from "react";
 import MainLayout from "@/components/pages/main";
 import BannerSection from "@/components/pages/hotel/banner";
 import PlanTripSection from "@/components/pages/hotel/plan-trip";

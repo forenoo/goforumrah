@@ -2,12 +2,60 @@ import Image from "next/image";
 import Button from "../button";
 import { TabType } from "@/types/tabs-list";
 import "./search-box.scss";
+import { useState } from "react";
+import DateRangePicker from "../date-range-picker";
+import PassengerSelector, { PassengerSelection } from "../passenger-selector";
 
 interface SearchBoxProps {
   activeTab: TabType;
 }
 
+interface DateRange {
+  startDate: Date | null;
+  endDate: Date | null;
+}
+
 export default function SearchBox({ activeTab }: SearchBoxProps) {
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [showPassengerSelector, setShowPassengerSelector] = useState(false);
+  const [datePickerType, setDatePickerType] = useState<string>("");
+  const [hotelDates, setHotelDates] = useState<DateRange>({
+    startDate: null,
+    endDate: null,
+  });
+  const [flightDepartureDate, setFlightDepartureDate] = useState<Date | null>(
+    null
+  );
+  const [flightReturnDate, setFlightReturnDate] = useState<Date | null>(null);
+  const [pickupDate, setPickupDate] = useState<DateRange>({
+    startDate: null,
+    endDate: null,
+  });
+  const [dropoffDate, setDropoffDate] = useState<DateRange>({
+    startDate: null,
+    endDate: null,
+  });
+
+  // Consolidated date picker state to avoid controlled/uncontrolled switching
+  const [currentDateRange, setCurrentDateRange] = useState<DateRange>({
+    startDate: null,
+    endDate: null,
+  });
+
+  // Passenger selection state
+  const [passengerSelection, setPassengerSelection] =
+    useState<PassengerSelection>({
+      adults: 1,
+      children: 0,
+      rooms: 1,
+    });
+
+  // Cabin class state
+  const [cabinClass, setCabinClass] = useState<string>("Economy");
+
+  const [flightType, setFlightType] = useState<string>("round-trip");
+  const [carType, setCarType] = useState<string>("return-to-same-location");
+
   const buttonContent = {
     hotel: "Search Hotel",
     flight: "Search Flight",
@@ -26,6 +74,122 @@ export default function SearchBox({ activeTab }: SearchBoxProps) {
     "book-transfer": "border-radius-top-none",
   };
 
+  const formatDateRange = (dates: {
+    startDate: Date | null;
+    endDate: Date | null;
+  }) => {
+    if (!dates.startDate) return "";
+
+    const startFormatted = dates.startDate.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+
+    if (!dates.endDate) return startFormatted;
+
+    const endFormatted = dates.endDate.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+
+    return `${startFormatted} - ${endFormatted}`;
+  };
+
+  const formatSingleDate = (date: Date | null) => {
+    if (!date) return "";
+
+    return date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+  };
+
+  const openDatePicker = (type: string) => {
+    setDatePickerType(type);
+    setShowDatePicker(true);
+
+    // Set appropriate date range based on the current tab
+    switch (type) {
+      case "hotel":
+        setCurrentDateRange(hotelDates);
+        break;
+      case "flight":
+        setCurrentDateRange({
+          startDate: flightDepartureDate,
+          endDate: flightType === "round-trip" ? flightReturnDate : null,
+        });
+        break;
+      case "transfer":
+        setCurrentDateRange({
+          startDate: pickupDate.startDate,
+          endDate: dropoffDate.startDate,
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
+  const closeDatePicker = () => {
+    setShowDatePicker(false);
+  };
+
+  const openPassengerSelector = () => {
+    setShowPassengerSelector(true);
+  };
+
+  const closePassengerSelector = () => {
+    setShowPassengerSelector(false);
+  };
+
+  const handlePassengerSelectionChange = (selection: PassengerSelection) => {
+    setPassengerSelection(selection);
+    if (selection.cabinClass) {
+      setCabinClass(selection.cabinClass);
+    }
+  };
+
+  const handleCabinClassChange = (newClass: string) => {
+    setCabinClass(newClass);
+  };
+
+  const handleDateChange = (dates: {
+    startDate: Date | null;
+    endDate: Date | null;
+  }) => {
+    // Always update the currentDateRange to keep DateRangePicker controlled
+    setCurrentDateRange(dates);
+
+    switch (datePickerType) {
+      case "hotel":
+        setHotelDates(dates);
+        break;
+      case "flight":
+        setFlightDepartureDate(dates.startDate);
+        if (flightType === "round-trip") {
+          setFlightReturnDate(dates.endDate);
+        } else {
+          setFlightReturnDate(null);
+        }
+        break;
+      case "transfer":
+        setPickupDate({
+          startDate: dates.startDate,
+          endDate: null,
+        });
+        setDropoffDate({
+          startDate: dates.endDate,
+          endDate: null,
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
   const renderHotelSearch = () => (
     <div className="search-container">
       <div className="search-item search-item--full">
@@ -42,7 +206,11 @@ export default function SearchBox({ activeTab }: SearchBoxProps) {
           placeholder="Where are you going?"
         />
       </div>
-      <div className="search-item">
+      <div
+        className="search-item"
+        onClick={() => openDatePicker("hotel")}
+        style={{ cursor: "pointer", position: "relative" }}
+      >
         <Image
           src="/img/calendar.svg"
           alt="Calendar"
@@ -50,9 +218,27 @@ export default function SearchBox({ activeTab }: SearchBoxProps) {
           height={24}
           className="search-item-icon"
         />
-        <p>Check in - Check out</p>
+        <p>
+          {hotelDates.startDate && hotelDates.endDate
+            ? formatDateRange(hotelDates)
+            : "Check in - Check out"}
+        </p>
+
+        {datePickerType === "hotel" && (
+          <DateRangePicker
+            isOpen={showDatePicker}
+            onClose={closeDatePicker}
+            onDateChange={handleDateChange}
+            initialStartDate={currentDateRange.startDate}
+            initialEndDate={currentDateRange.endDate}
+          />
+        )}
       </div>
-      <div className="search-item-wrapper">
+      <div
+        className="search-item-wrapper"
+        onClick={openPassengerSelector}
+        style={{ cursor: "pointer", position: "relative" }}
+      >
         <div className="search-item--small">
           <Image
             src="/img/users.svg"
@@ -61,16 +247,33 @@ export default function SearchBox({ activeTab }: SearchBoxProps) {
             height={24}
             className="search-item-icon"
           />
-          <p>1 Adult</p>
+          <p>
+            {passengerSelection.adults} Adult
+            {passengerSelection.adults !== 1 ? "s" : ""}
+          </p>
         </div>
         <div className="dot-separator"></div>
         <div className="search-item--small">
-          <p>0 Children</p>
+          <p>{passengerSelection.children} Children</p>
         </div>
         <div className="dot-separator"></div>
         <div className="search-item--small">
-          <p>1 Room</p>
+          <p>
+            {passengerSelection.rooms} Room
+            {passengerSelection.rooms !== 1 ? "s" : ""}
+          </p>
         </div>
+
+        {showPassengerSelector && (
+          <PassengerSelector
+            isOpen={showPassengerSelector}
+            onClose={closePassengerSelector}
+            onSelectionChange={handlePassengerSelectionChange}
+            initialAdults={passengerSelection.adults}
+            initialChildren={passengerSelection.children}
+            initialRooms={passengerSelection.rooms}
+          />
+        )}
       </div>
     </div>
   );
@@ -82,9 +285,10 @@ export default function SearchBox({ activeTab }: SearchBoxProps) {
           <input
             type="radio"
             name="flight-type"
-            defaultChecked
+            checked={flightType === "round-trip"}
             value="round-trip"
             className="flight-type-toggle-item-input"
+            onChange={(e) => setFlightType(e.target.value)}
           />
           <div className="radio-button"></div>
           <p className="base base--medium">Round-trip</p>
@@ -93,8 +297,10 @@ export default function SearchBox({ activeTab }: SearchBoxProps) {
           <input
             type="radio"
             name="flight-type"
+            checked={flightType === "one-way"}
             value="one-way"
             className="flight-type-toggle-item-input"
+            onChange={(e) => setFlightType(e.target.value)}
           />
           <div className="radio-button"></div>
           <p className="base base--medium">One-way</p>
@@ -109,7 +315,11 @@ export default function SearchBox({ activeTab }: SearchBoxProps) {
             height={24}
             className="search-item-icon"
           />
-          <p>Where from?</p>
+          <input
+            type="text"
+            className="search-item-input"
+            placeholder="Where from?"
+          />
         </div>
         <Image
           src="/img/ArrowsLeftRight.svg"
@@ -126,9 +336,17 @@ export default function SearchBox({ activeTab }: SearchBoxProps) {
             height={24}
             className="search-item-icon"
           />
-          <p>Where to?</p>
+          <input
+            type="text"
+            className="search-item-input"
+            placeholder="Where to?"
+          />
         </div>
-        <div className="search-item">
+        <div
+          className="search-item"
+          onClick={() => openDatePicker("flight")}
+          style={{ cursor: "pointer", position: "relative" }}
+        >
           <Image
             src="/img/calendar.svg"
             alt="Calendar"
@@ -136,19 +354,45 @@ export default function SearchBox({ activeTab }: SearchBoxProps) {
             height={24}
             className="search-item-icon"
           />
-          <p>Departure</p>
+          <p>
+            {flightDepartureDate
+              ? formatSingleDate(flightDepartureDate)
+              : "Departure"}
+          </p>
+
+          {datePickerType === "flight" && (
+            <DateRangePicker
+              isOpen={showDatePicker}
+              onClose={closeDatePicker}
+              onDateChange={handleDateChange}
+              initialStartDate={currentDateRange.startDate}
+              initialEndDate={currentDateRange.endDate}
+            />
+          )}
         </div>
-        <div className="search-item">
-          <Image
-            src="/img/calendar.svg"
-            alt="Calendar"
-            width={24}
-            height={24}
-            className="search-item-icon"
-          />
-          <p>Return</p>
-        </div>
-        <div className="search-item-wrapper">
+        {flightType === "round-trip" && (
+          <div
+            className="search-item"
+            onClick={() => openDatePicker("flight")}
+            style={{ cursor: "pointer", position: "relative" }}
+          >
+            <Image
+              src="/img/calendar.svg"
+              alt="Calendar"
+              width={24}
+              height={24}
+              className="search-item-icon"
+            />
+            <p>
+              {flightReturnDate ? formatSingleDate(flightReturnDate) : "Return"}
+            </p>
+          </div>
+        )}
+        <div
+          className="search-item-wrapper"
+          onClick={openPassengerSelector}
+          style={{ cursor: "pointer", position: "relative" }}
+        >
           <div className="search-item--small">
             <Image
               src="/img/users.svg"
@@ -157,12 +401,29 @@ export default function SearchBox({ activeTab }: SearchBoxProps) {
               height={24}
               className="search-item-icon"
             />
-            <p>1 Adult</p>
+            <p>
+              {passengerSelection.adults} Adult
+              {passengerSelection.adults !== 1 ? "s" : ""}
+            </p>
           </div>
           <div className="dot-separator"></div>
           <div className="search-item--small">
-            <p>Economy</p>
+            <p>{cabinClass}</p>
           </div>
+
+          {showPassengerSelector && (
+            <PassengerSelector
+              isOpen={showPassengerSelector}
+              onClose={closePassengerSelector}
+              onSelectionChange={handlePassengerSelectionChange}
+              initialAdults={passengerSelection.adults}
+              initialChildren={passengerSelection.children}
+              initialRooms={passengerSelection.rooms}
+              showCabinClass={true}
+              initialCabinClass={cabinClass}
+              onCabinClassChange={handleCabinClassChange}
+            />
+          )}
         </div>
       </div>
     </>
@@ -175,9 +436,10 @@ export default function SearchBox({ activeTab }: SearchBoxProps) {
           <input
             type="radio"
             name="car-type"
-            defaultChecked
+            checked={carType === "return-to-same-location"}
             value="return-to-same-location"
             className="car-type-toggle-item-input"
+            onChange={(e) => setCarType(e.target.value)}
           />
           <div className="radio-button"></div>
           <p className="base base--medium">Return to same location</p>
@@ -188,13 +450,14 @@ export default function SearchBox({ activeTab }: SearchBoxProps) {
             name="car-type"
             value="return-to-different-location"
             className="car-type-toggle-item-input"
+            onChange={(e) => setCarType(e.target.value)}
           />
           <div className="radio-button"></div>
           <p className="base base--medium">Return to different location</p>
         </label>
       </div>
       <div className="search-container">
-        <div className="search-item search-item--full">
+        <div className="search-item">
           <Image
             src="/img/map-pin-outline.svg"
             alt="Location"
@@ -202,9 +465,33 @@ export default function SearchBox({ activeTab }: SearchBoxProps) {
             height={24}
             className="search-item-icon"
           />
-          <p>Where your pick-up location?</p>
+          <input
+            type="text"
+            placeholder="Where your pick-up location?"
+            className="search-item-input"
+          />
         </div>
-        <div className="search-item">
+        {carType !== "return-to-same-location" && (
+          <div className="search-item">
+            <Image
+              src="/img/map-pin-outline.svg"
+              alt="Location"
+              width={24}
+              height={24}
+              className="search-item-icon"
+            />
+            <input
+              type="text"
+              placeholder="Your drop-off location?"
+              className="search-item-input"
+            />
+          </div>
+        )}
+        <div
+          className="search-item"
+          onClick={() => openDatePicker("transfer")}
+          style={{ cursor: "pointer", position: "relative" }}
+        >
           <Image
             src="/img/calendar.svg"
             alt="Calendar"
@@ -212,9 +499,17 @@ export default function SearchBox({ activeTab }: SearchBoxProps) {
             height={24}
             className="search-item-icon"
           />
-          <p>Pick-up Date & Time</p>
+          <p>
+            {pickupDate.startDate
+              ? formatSingleDate(pickupDate.startDate)
+              : "Pick-up Date & Time"}
+          </p>
         </div>
-        <div className="search-item">
+        <div
+          className="search-item"
+          onClick={() => openDatePicker("transfer")}
+          style={{ cursor: "pointer", position: "relative" }}
+        >
           <Image
             src="/img/calendar.svg"
             alt="Calendar"
@@ -222,8 +517,22 @@ export default function SearchBox({ activeTab }: SearchBoxProps) {
             height={24}
             className="search-item-icon"
           />
-          <p>Drop-off Date & Time</p>
+          <p>
+            {dropoffDate.startDate
+              ? formatSingleDate(dropoffDate.startDate)
+              : "Drop-off Date & Time"}
+          </p>
         </div>
+
+        {datePickerType === "transfer" && (
+          <DateRangePicker
+            isOpen={showDatePicker}
+            onClose={closeDatePicker}
+            onDateChange={handleDateChange}
+            initialStartDate={currentDateRange.startDate}
+            initialEndDate={currentDateRange.endDate}
+          />
+        )}
       </div>
     </>
   );

@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { FOOTER_LINKS } from "@/constants/footer-link";
 import Button from "@/components/ui/button";
+import Logo from "@/public/img/logo.svg";
 import "./footer.scss";
 
 export default function Footer() {
@@ -76,7 +77,7 @@ export default function Footer() {
         </div>
         <div className="content">
           <div className="logo">
-            <Image src="/img/logo.svg" alt="Logo" width={250} height={50} />
+            <Logo />
             <p className="copyright base base--regular">
               &copy; 2022 Goforumrah LLC All rights reserved.
             </p>

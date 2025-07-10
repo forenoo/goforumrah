@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import CarIcon from "@/public/img/car.svg";
 import "./banner.scss";
 
 export default function BookTransferBannerSection() {
@@ -8,7 +8,7 @@ export default function BookTransferBannerSection() {
     <section className="book-transfer-banner-section">
       <div className="banner__content">
         <div className="banner__content-icon-box">
-          <Image src="/img/car.svg" alt="car" width={24} height={24} />
+          <CarIcon />
         </div>
         <div className="banner__content-text">
           <p className="xl xl--bold">

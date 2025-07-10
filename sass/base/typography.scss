@@ -105,3 +105,20 @@ body {
     font-weight: 400;
   }
 }
+
+.xs {
+  font-size: 1rem;
+  line-height: 150%;
+
+  &--bold {
+    font-weight: 600;
+  }
+
+  &--medium {
+    font-weight: 500;
+  }
+
+  &--regular {
+    font-weight: 400;
+  }
+}

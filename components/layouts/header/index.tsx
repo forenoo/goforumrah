@@ -1,9 +1,9 @@
 import React from "react";
-import "./header.scss";
 import { TabType } from "@/types/tabs-list";
 import Tabs from "../../ui/tabs";
 import SearchBox from "../../ui/search";
-import Image from "next/image";
+import WarningIcon from "@/public/img/warning.svg";
+import "./header.scss";
 
 export default function Header({
   activeTab,
@@ -45,13 +45,7 @@ export default function Header({
             <input type="checkbox" className="custom-checkbox__input" />
             <span className="custom-checkbox__checkmark"></span>
             <p className="base base--medium">Driver aged between 30 - 65</p>
-            <Image
-              className="aged-driver-check-icon"
-              src="/img/warning.svg"
-              alt="warning"
-              width={24}
-              height={24}
-            />
+            <WarningIcon className="custom-checkbox-icon" />
           </label>
         </div>
       )}

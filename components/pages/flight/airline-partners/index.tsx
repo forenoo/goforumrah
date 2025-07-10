@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React from "react";
 import PartnerEmirates from "@/public/img/Airline_Partner - Emirates.svg";
 import PartnerIsland from "@/public/img/Airline_Partner - Island Airlines.svg";
@@ -31,8 +30,10 @@ export default function AirlinePartnerSection() {
         </p>
       </div>
       <div className="airline-partner__content">
-        {partners.map((partner, index) => (
-          <AirlinePartnerItem key={index} image={partner} />
+        {partners.map((Partner, index) => (
+          <AirlinePartnerItem key={index}>
+            <Partner />
+          </AirlinePartnerItem>
         ))}
       </div>
     </section>
@@ -40,13 +41,9 @@ export default function AirlinePartnerSection() {
 }
 
 interface AirlinePartnerItemProps {
-  image: string;
+  children: React.ReactNode;
 }
 
-function AirlinePartnerItem({ image }: AirlinePartnerItemProps) {
-  return (
-    <div className="airline-partner__item">
-      <Image src={image} alt="partner" width={100} height={56} />
-    </div>
-  );
+function AirlinePartnerItem({ children }: AirlinePartnerItemProps) {
+  return <div className="airline-partner__item">{children}</div>;
 }

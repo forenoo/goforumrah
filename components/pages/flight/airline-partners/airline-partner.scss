@@ -21,11 +21,8 @@
     border: 1.5px solid $color-input;
     display: flex;
     justify-content: center;
+    align-items: center;
     border-radius: 16px;
     padding: 24px;
-
-    &-logo {
-      object-fit: contain;
-    }
   }
 }
