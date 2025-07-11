@@ -146,8 +146,7 @@
 
   &__cabin-option {
     padding: 16px;
-    border-radius: 8px;
-    border: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -155,12 +154,11 @@
     transition: all 0.2s ease;
 
     &:hover {
-      border-color: $color-toscha-1;
+      color: $color-toscha-1;
     }
 
     &--active {
-      border-color: $color-toscha-1;
-      background-color: rgba($color-toscha-1, 0.05);
+      color: $color-toscha-1;
     }
   }
 

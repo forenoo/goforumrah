@@ -272,6 +272,7 @@ export default function SearchBox({ activeTab }: SearchBoxProps) {
             initialAdults={passengerSelection.adults}
             initialChildren={passengerSelection.children}
             initialRooms={passengerSelection.rooms}
+            selectorType="hotel"
           />
         )}
       </div>
@@ -422,6 +423,7 @@ export default function SearchBox({ activeTab }: SearchBoxProps) {
               showCabinClass={true}
               initialCabinClass={cabinClass}
               onCabinClassChange={handleCabinClassChange}
+              selectorType="flight"
             />
           )}
         </div>

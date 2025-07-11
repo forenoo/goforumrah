@@ -13,6 +13,7 @@ interface PassengerSelectorProps {
   showCabinClass?: boolean;
   initialCabinClass?: string;
   onCabinClassChange?: (cabinClass: string) => void;
+  selectorType?: "hotel" | "flight";
 }
 
 export interface PassengerSelection {
@@ -32,6 +33,7 @@ export default function PassengerSelector({
   showCabinClass = false,
   initialCabinClass = "Economy",
   onCabinClassChange,
+  selectorType = "flight",
 }: PassengerSelectorProps) {
   const [adults, setAdults] = useState(initialAdults);
   const [children, setChildren] = useState(initialChildren);
@@ -89,7 +91,7 @@ export default function PassengerSelector({
   };
 
   const decrementAdults = () => {
-    if (adults > 1) {
+    if (adults > 0) {
       const newValue = adults - 1;
       setAdults(newValue);
       onSelectionChange({ adults: newValue, children, rooms, cabinClass });
@@ -117,7 +119,7 @@ export default function PassengerSelector({
   };
 
   const decrementRooms = () => {
-    if (rooms > 1) {
+    if (rooms >= 1) {
       const newValue = rooms - 1;
       setRooms(newValue);
       onSelectionChange({ adults, children, rooms: newValue, cabinClass });
@@ -159,7 +161,7 @@ export default function PassengerSelector({
                 <button
                   className={`passenger-selector__button passenger-selector__button--decrement`}
                   onClick={decrementAdults}
-                  disabled={adults <= 1}
+                  disabled={adults <= 0}
                 >
                   <MinusIcon className="passenger-selector__icon" />
                 </button>
@@ -198,14 +200,16 @@ export default function PassengerSelector({
 
             <div className="passenger-selector__row">
               <div className="passenger-selector__label">
-                <div>Baby</div>
-                <div className="passenger-selector__sublabel">Under 2 y.o</div>
+                <div>{selectorType === "hotel" ? "Room" : "Baby"}</div>
+                <div className="passenger-selector__sublabel">
+                  {selectorType === "hotel" ? "Number of rooms" : "Under 2 y.o"}
+                </div>
               </div>
               <div className="passenger-selector__controls">
                 <button
                   className={`passenger-selector__button passenger-selector__button--decrement`}
                   onClick={decrementRooms}
-                  disabled={rooms <= 1}
+                  disabled={rooms <= 0}
                 >
                   <MinusIcon className="passenger-selector__icon" />
                 </button>
