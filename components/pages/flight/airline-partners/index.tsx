@@ -1,13 +1,14 @@
 import React from "react";
-import PartnerEmirates from "@/public/img/Airline_Partner - Emirates.svg";
-import PartnerIsland from "@/public/img/Airline_Partner - Island Airlines.svg";
-import PartnerEtihad from "@/public/img/Airline_Partner - Etihad.svg";
-import PartnerQatar from "@/public/img/Airline_Partner - Qatar Airways.svg";
-import PartnerFlyDubai from "@/public/img/Airline_Partner - Fly DUbai.svg";
-import PartnerGaruda from "@/public/img/Airline_Partner - Garuda Indonesia.svg";
-import PartnerMalaysia from "@/public/img/Airline_Partner - Malaysia Airlines.svg";
-import PartnerSingapore from "@/public/img/Airline_Partner - Singapore Airlines.svg";
+import PartnerEmirates from "@/public/img/Airline_Partner - Emirates.png";
+import PartnerIsland from "@/public/img/Airline_Partner - Island Airlines.png";
+import PartnerEtihad from "@/public/img/Airline_Partner - Etihad.png";
+import PartnerQatar from "@/public/img/Airline_Partner - Qatar Airways.png";
+import PartnerFlyDubai from "@/public/img/Airline_Partner - Fly DUbai.png";
+import PartnerGaruda from "@/public/img/Airline_Partner - Garuda Indonesia.png";
+import PartnerMalaysia from "@/public/img/Airline_Partner - Malaysia Airlines.png";
+import PartnerSingapore from "@/public/img/Airline_Partner - Singapore Airlines.png";
 import "./airline-partner.scss";
+import Image from "next/image";
 
 export default function AirlinePartnerSection() {
   const partners = [
@@ -32,7 +33,7 @@ export default function AirlinePartnerSection() {
       <div className="airline-partner__content">
         {partners.map((Partner, index) => (
           <AirlinePartnerItem key={index}>
-            <Partner />
+            <Image src={Partner} alt="Airline Partner" height={50} />
           </AirlinePartnerItem>
         ))}
       </div>

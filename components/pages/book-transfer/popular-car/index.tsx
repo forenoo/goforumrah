@@ -1,9 +1,10 @@
 import React from "react";
-import CarBrand1 from "@/public/img/Car-hire-brand-01.svg";
-import CarBrand2 from "@/public/img/Car-hire-brand-02.svg";
-import CarBrand3 from "@/public/img/Car-hire-brand-03.svg";
-import CarBrand4 from "@/public/img/Car-hire-brand-04.svg";
+import CarBrand1 from "@/public/img/Car-hire-brand-01.png";
+import CarBrand2 from "@/public/img/Car-hire-brand-02.png";
+import CarBrand3 from "@/public/img/Car-hire-brand-03.png";
+import CarBrand4 from "@/public/img/Car-hire-brand-04.png";
 import "./popular-car.scss";
+import Image from "next/image";
 
 export default function PopularCarSection() {
   const POPULAR_CAR_BRANDS = [CarBrand1, CarBrand2, CarBrand3, CarBrand4];
@@ -19,7 +20,7 @@ export default function PopularCarSection() {
       <div className="popular-car__content">
         {POPULAR_CAR_BRANDS.map((Brand, index) => (
           <PopularCarItem key={index}>
-            <Brand />
+            <Image src={Brand} alt="Car Brand" height={50} />
           </PopularCarItem>
         ))}
       </div>
