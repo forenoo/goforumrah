@@ -123,7 +123,6 @@
     align-items: center;
     flex: 1;
     margin-right: 16px;
-    justify-content: space-between;
 
     &--flight {
       & > *:is(:first-child) {
@@ -190,8 +189,10 @@
     }
 
     &-wrapper {
+      min-width: 25%;
       display: flex;
       align-items: center;
+      justify-content: space-between;
 
       @include respond(xl) {
         justify-content: space-between;

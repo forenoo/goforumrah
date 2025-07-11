@@ -46,6 +46,10 @@
   &__columns {
     display: flex;
     gap: 30px;
+
+    @include respond(md) {
+      flex-direction: column;
+    }
   }
 
   &__column {

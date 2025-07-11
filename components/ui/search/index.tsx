@@ -457,7 +457,7 @@ export default function SearchBox({ activeTab }: SearchBoxProps) {
         </label>
       </div>
       <div className="search-container">
-        <div className="search-item">
+        <div className="search-item search-item--full">
           <Image
             src="/img/map-pin-outline.svg"
             alt="Location"
@@ -472,7 +472,7 @@ export default function SearchBox({ activeTab }: SearchBoxProps) {
           />
         </div>
         {carType !== "return-to-same-location" && (
-          <div className="search-item">
+          <div className="search-item search-item--full">
             <Image
               src="/img/map-pin-outline.svg"
               alt="Location"
@@ -504,6 +504,16 @@ export default function SearchBox({ activeTab }: SearchBoxProps) {
               ? formatSingleDate(pickupDate.startDate)
               : "Pick-up Date & Time"}
           </p>
+
+          {datePickerType === "transfer" && (
+            <DateRangePicker
+              isOpen={showDatePicker}
+              onClose={closeDatePicker}
+              onDateChange={handleDateChange}
+              initialStartDate={currentDateRange.startDate}
+              initialEndDate={currentDateRange.endDate}
+            />
+          )}
         </div>
         <div
           className="search-item"
@@ -523,16 +533,6 @@ export default function SearchBox({ activeTab }: SearchBoxProps) {
               : "Drop-off Date & Time"}
           </p>
         </div>
-
-        {datePickerType === "transfer" && (
-          <DateRangePicker
-            isOpen={showDatePicker}
-            onClose={closeDatePicker}
-            onDateChange={handleDateChange}
-            initialStartDate={currentDateRange.startDate}
-            initialEndDate={currentDateRange.endDate}
-          />
-        )}
       </div>
     </>
   );
