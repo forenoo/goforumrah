@@ -1,0 +1,211 @@
+@use "../../../../sass/abstracts/variables.scss" as *;
+@use "../../../../sass/abstracts/mixins.scss" as *;
+
+.trending-destination {
+  &__content {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 20px;
+
+    @include respond(md) {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+  }
+
+  &__item {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+      .trending-destination__item-overlay-details {
+        opacity: 1;
+        transform: translateY(-12px);
+      }
+    }
+
+    &-flag {
+      width: fit-content;
+      margin-left: 10px;
+      vertical-align: middle;
+    }
+
+    &-image {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+
+    &-flag {
+      width: auto;
+      height: 20px;
+      border-radius: 4px;
+
+      @include respond(lg) {
+        height: 18px;
+      }
+
+      @include respond(md) {
+        height: 16px;
+      }
+    }
+
+    &-overlay {
+      background-image: linear-gradient(
+        to bottom,
+        rgba($color-black, 0.4) 0%,
+        rgba($color-black, 0.4) 100%
+      );
+      width: 100%;
+      height: 100%;
+      color: $color-white;
+      padding: 24px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      &-content {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        gap: 8px;
+
+        &-title {
+          font-size: 28px;
+          font-weight: 600;
+          line-height: 1.2;
+          margin-bottom: 4px;
+          display: flex;
+          align-items: center;
+
+          @include respond(lg) {
+            font-size: 24px;
+          }
+
+          @include respond(md) {
+            font-size: 22px;
+          }
+
+          @include respond(sm) {
+            font-size: 20px;
+          }
+        }
+
+        &-location {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 14px;
+          margin-bottom: 8px;
+
+          span {
+            font-weight: 500;
+          }
+        }
+      }
+
+      &-details {
+        margin-top: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        transition: all 0.3s ease;
+        transform: translateY(0);
+
+        &-airline {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 14px;
+
+          img {
+            background-color: white;
+            border-radius: 50%;
+            padding: 2px;
+          }
+
+          span {
+            font-weight: 500;
+          }
+        }
+
+        &-price {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+
+          .price-label {
+            color: $color-white;
+            font-size: 12px;
+          }
+
+          .price-value {
+            font-size: 18px;
+            font-weight: 500;
+            color: $color-toscha-2;
+          }
+        }
+      }
+    }
+
+    &--1,
+    &--2 {
+      aspect-ratio: 16 / 9;
+      grid-column: span 6 / span 6;
+
+      @include respond(md) {
+        grid-column: span 1 / span 1;
+      }
+    }
+
+    &--3,
+    &--4 {
+      aspect-ratio: 4 / 3;
+      grid-column: span 4 / span 4;
+
+      @include respond(lg) {
+        aspect-ratio: 16 / 9;
+        grid-column: span 6 / span 6;
+      }
+
+      @include respond(md) {
+        grid-column: span 1 / span 1;
+      }
+    }
+
+    &--5 {
+      aspect-ratio: 4 / 3;
+      grid-column: span 4 / span 4;
+
+      @include respond(lg) {
+        aspect-ratio: 16 / 9;
+        max-height: 250px;
+        width: 100%;
+        grid-column: span 12 / span 12;
+      }
+
+      @include respond(md) {
+        max-height: none;
+        grid-column: span 1 / span 1;
+      }
+    }
+  }
+}
+
+.airline-icon {
+  width: 18px;
+  height: 18px;
+}

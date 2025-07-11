@@ -15,6 +15,7 @@ import AirlinePartnerSection from "@/components/pages/flight/airline-partners";
 import BookTransferBannerSection from "@/components/pages/book-transfer/banner";
 import PopularCarSection from "@/components/pages/book-transfer/popular-car";
 import PopularDestinationSection from "@/components/pages/book-transfer/popular-destination";
+import TrendingDestinationSection from "@/components/pages/flight/trending-destination";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<TabType>("hotel");
@@ -35,7 +36,7 @@ export default function Home() {
           <>
             <TrendingCitiesSection />
             <AirlinePartnerSection />
-            <FeaturedHotelsSection />
+            <TrendingDestinationSection />
           </>
         )}
         {activeTab === "book-transfer" && (

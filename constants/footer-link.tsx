@@ -1,3 +1,8 @@
+import InstagramIcon from "@/public/img/instagram-outline.svg";
+import FacebookIcon from "@/public/img/facebook-outline.svg";
+import TwitterIcon from "@/public/img/twitter-outline.svg";
+import YoutubeIcon from "@/public/img/youtube-outline.svg";
+
 export const FOOTER_LINKS = {
   explore: [
     {
@@ -64,22 +69,22 @@ export const FOOTER_LINKS = {
     {
       id: 1,
       name: "Instagram",
-      icon: "/img/instagram-outline.svg",
+      icon: InstagramIcon,
     },
     {
       id: 2,
       name: "Facebook",
-      icon: "/img/facebook-outline.svg",
+      icon: FacebookIcon,
     },
     {
       id: 3,
       name: "Twitter",
-      icon: "/img/twitter-outline.svg",
+      icon: TwitterIcon,
     },
     {
       id: 4,
       name: "Youtube",
-      icon: "/img/youtube-outline.svg",
+      icon: YoutubeIcon,
     },
   ],
 };

@@ -30,6 +30,15 @@ select {
   font: inherit;
 }
 
+input:active,
+input:focus,
+textarea:active,
+textarea:focus,
+select:active,
+select:focus {
+  outline: 2px solid $color-toscha-2;
+}
+
 p,
 h1,
 h2,

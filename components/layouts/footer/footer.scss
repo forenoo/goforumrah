@@ -176,8 +176,16 @@
         cursor: pointer;
 
         svg {
+          color: $color-white;
           width: 24px;
           height: 24px;
+          transition: color 0.3s ease-in-out;
+        }
+
+        &:hover {
+          svg {
+            color: $color-toscha-2;
+          }
         }
       }
     }

@@ -1,6 +1,4 @@
-import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { FOOTER_LINKS } from "@/constants/footer-link";
 import Button from "@/components/ui/button";
 import Logo from "@/public/img/logo.svg";
@@ -85,7 +83,7 @@ export default function Footer() {
           <div className="social-media">
             {FOOTER_LINKS.socialMedia.map((item) => (
               <button key={item.id} className="social-media__item">
-                <Image src={item.icon} alt={item.name} width={24} height={24} />
+                <item.icon />
               </button>
             ))}
           </div>
