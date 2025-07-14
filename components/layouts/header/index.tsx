@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { TabType } from "@/types/tabs-list";
 import Tabs from "../../ui/tabs";
 import SearchBox from "../../ui/search";
@@ -31,14 +31,28 @@ export default function Header({
     },
   };
 
+  // LIFTED STATE: carType
+  const [carType, setCarType] = useState<string>("return-to-same-location");
+
   return (
-    <header className={`header ${headerClasses[activeTab] || "header--hotel"}`}>
+    <header
+      className={`header ${headerClasses[activeTab] || "header--hotel"} ${
+        activeTab === "book-transfer" &&
+        carType === "return-to-different-location"
+          ? "different-location"
+          : ""
+      }`}
+    >
       <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
       <div className="content padding-container">
         <h1 className="heading-1">{headerContent.heading[activeTab]}</h1>
         <p className="xl xl--medium">{headerContent.description[activeTab]}</p>
       </div>
-      <SearchBox activeTab={activeTab} />
+      <SearchBox
+        activeTab={activeTab}
+        carType={carType}
+        setCarType={setCarType}
+      />
       {activeTab === "book-transfer" && (
         <div className="aged-driver-check padding-container">
           <label className="custom-checkbox">

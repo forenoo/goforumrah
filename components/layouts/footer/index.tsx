@@ -75,7 +75,7 @@ export default function Footer() {
         </div>
         <div className="content">
           <div className="logo">
-            <Logo />
+            <Logo className="logo__img" />
             <p className="copyright base base--regular">
               &copy; 2022 Goforumrah LLC All rights reserved.
             </p>

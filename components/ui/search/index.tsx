@@ -8,6 +8,8 @@ import PassengerSelector, { PassengerSelection } from "../passenger-selector";
 
 interface SearchBoxProps {
   activeTab: TabType;
+  carType?: string;
+  setCarType?: (type: string) => void;
 }
 
 interface DateRange {
@@ -15,7 +17,11 @@ interface DateRange {
   endDate: Date | null;
 }
 
-export default function SearchBox({ activeTab }: SearchBoxProps) {
+export default function SearchBox({
+  activeTab,
+  carType,
+  setCarType,
+}: SearchBoxProps) {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showPassengerSelector, setShowPassengerSelector] = useState(false);
   const [datePickerType, setDatePickerType] = useState<string>("");
@@ -54,7 +60,7 @@ export default function SearchBox({ activeTab }: SearchBoxProps) {
   const [cabinClass, setCabinClass] = useState<string>("Economy");
 
   const [flightType, setFlightType] = useState<string>("round-trip");
-  const [carType, setCarType] = useState<string>("return-to-same-location");
+  // REMOVE: const [carType, setCarType] = useState<string>("return-to-same-location");
 
   const buttonContent = {
     hotel: "Search Hotel",
@@ -441,7 +447,7 @@ export default function SearchBox({ activeTab }: SearchBoxProps) {
             checked={carType === "return-to-same-location"}
             value="return-to-same-location"
             className="car-type-toggle-item-input"
-            onChange={(e) => setCarType(e.target.value)}
+            onChange={(e) => setCarType && setCarType(e.target.value)}
           />
           <div className="radio-button"></div>
           <p className="base base--medium">Return to same location</p>
@@ -452,7 +458,7 @@ export default function SearchBox({ activeTab }: SearchBoxProps) {
             name="car-type"
             value="return-to-different-location"
             className="car-type-toggle-item-input"
-            onChange={(e) => setCarType(e.target.value)}
+            onChange={(e) => setCarType && setCarType(e.target.value)}
           />
           <div className="radio-button"></div>
           <p className="base base--medium">Return to different location</p>
@@ -551,6 +557,11 @@ export default function SearchBox({ activeTab }: SearchBoxProps) {
     <div
       className={`search max-container padding-container ${
         searchClassMap[activeTab] || ""
+      } ${
+        activeTab === "book-transfer" &&
+        carType === "return-to-different-location"
+          ? "different-location"
+          : ""
       }`}
     >
       <div className={`search-box ${boxClassMap[activeTab] || ""}`}>

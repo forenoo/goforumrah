@@ -143,6 +143,11 @@
     }
 
     .logo {
+      &__img {
+        width: 230px;
+        height: 40px;
+      }
+
       @include respond(md) {
         display: flex;
         flex-direction: column;

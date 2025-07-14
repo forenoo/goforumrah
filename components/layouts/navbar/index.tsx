@@ -9,7 +9,7 @@ import "./navbar.scss";
 export default function Navbar() {
   return (
     <nav className="navbar">
-      <Logo />
+      <Logo className="navbar__logo-img" />
       <div className="navbar__menu">
         <div className="navbar__menu-item">
           <p className="navbar__menu-item-text">IDR</p>
