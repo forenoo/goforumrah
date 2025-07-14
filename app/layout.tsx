@@ -1,22 +1,6 @@
+import "./general-sans.css";
 import "@/sass/main.scss";
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-
-const generalSans = localFont({
-  src: "../assets/fonts/GeneralSans-Variable.woff2",
-  variable: "--font-general-sans",
-  display: "swap",
-  preload: true,
-  fallback: [
-    "-apple-system",
-    "BlinkMacSystemFont",
-    "Segoe UI",
-    "Roboto",
-    "Helvetica Neue",
-    "Arial",
-    "sans-serif",
-  ],
-});
 
 export const metadata: Metadata = {
   title: "GoForUmrah",
@@ -30,9 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${generalSans.className} ${generalSans.variable}`}>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
