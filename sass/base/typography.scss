@@ -1,13 +1,5 @@
 @use "../abstracts/variables.scss" as *;
 
-body {
-  font-family: generalSans;
-  font-weight: 400;
-  font-style: normal;
-  color: $color-white;
-  font-size: 1.6rem;
-}
-
 .heading-1 {
   font-weight: 600;
   line-height: 120%;
